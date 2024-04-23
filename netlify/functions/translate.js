@@ -56,7 +56,7 @@ async function translate(
         source_lang_user_selected: sourceLang.toUpperCase(),
         target_lang: targetLang.toUpperCase(),
       },
-      timestamp: getTimestamp(iCount),
+      timestamp: getTimestamp(0),
     },
   };
 
