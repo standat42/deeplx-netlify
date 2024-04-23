@@ -16,10 +16,6 @@ const headers = {
   Connection: 'keep-alive',
 };
 
-function getICount(translateText) {
-  return (translateText || '').split('i').length - 1;
-}
-
 function getRandomNumber() {
   return random(8300000, 8399998) * 1000;
 }
@@ -40,7 +36,6 @@ async function translate(
   numberAlternative = 0,
   printResult = false,
 ) {
-  const iCount = getICount(text);
   const id = getRandomNumber();
 
   numberAlternative = Math.max(Math.min(3, numberAlternative), 0);
