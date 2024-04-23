@@ -48,8 +48,8 @@ async function translate(
       texts: [{ text: text, requestAlternatives: numberAlternative }],
       splitting: 'newlines',
       lang: {
-        source_lang_user_selected: sourceLang.toUpperCase(),
-        target_lang: targetLang.toUpperCase(),
+        source_lang_user_selected: sourceLang,
+        target_lang: targetLang,
       },
       timestamp: getTimestamp(0),
     },
