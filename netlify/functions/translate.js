@@ -67,15 +67,10 @@ exports.handler = async function (event, context) {
     );
   }
 
-  if (response.status !== 200) {
-    console.error('Error', response.status);
-    return;
-  }
-
   const result = response.data.result.texts[0];
 
   return {
-      statusCode: 200,
+      statusCode: response.status,
       headers: {
           'content-type': 'application/json'
       },
