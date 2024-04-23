@@ -94,4 +94,4 @@ async function translate(
   }
 }
 
-exports.translate = translate;
+exports.handler = translate;
