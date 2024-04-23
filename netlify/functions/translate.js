@@ -29,7 +29,7 @@ function getTimestamp(iCount) {
   return ts - (ts % iCount) + iCount;
 }
 
-async function translate(
+exports.handler = async function(
   text,
   sourceLang = 'AUTO',
   targetLang = 'ZH',
@@ -88,5 +88,3 @@ async function translate(
     console.error(err);
   }
 }
-
-exports.handler = translate;
