@@ -1,4 +1,4 @@
-import 'axios';
+import axios from 'axios';
 import { random } from 'lodash';
 
 const DEEPL_BASE_URL = 'https://www2.deepl.com/jsonrpc';
