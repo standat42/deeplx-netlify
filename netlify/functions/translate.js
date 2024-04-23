@@ -72,7 +72,7 @@ exports.handler = async function (event, context) {
     return;
   }
 
-  const result = response.data.result.texts[0]
+  const result = response.data.result.texts[0];
 
   return {
       statusCode: 200,
