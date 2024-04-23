@@ -61,12 +61,6 @@ exports.handler = async function (event, context) {
     headers: headers,
   });
 
-  if (response.status === 429) {
-    throw new Error(
-      `Too many requests, your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time.`
-    );
-  }
-
   const result = response.data.result.texts[0];
 
   return {
