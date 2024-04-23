@@ -29,27 +29,21 @@ function getTimestamp(iCount) {
   return ts - (ts % iCount) + iCount;
 }
 
-exports.handler = async function (
-  text,
-  sourceLang = 'AUTO',
-  targetLang = 'ZH',
-  numberAlternative = 0,
-  printResult = false,
-) {
+exports.handler = async function (event, context) {
   const id = getRandomNumber();
 
-  numberAlternative = Math.max(Math.min(3, numberAlternative), 0);
+  numberAlternative = Math.max(Math.min(3, 0), 0);
 
   const postData = {
     jsonrpc: '2.0',
     method: 'LMT_handle_texts',
     id: id,
     params: {
-      texts: [{ text: text, requestAlternatives: numberAlternative }],
+      texts: [{ text: event.queryStringParameters.text, requestAlternatives: 0 }],
       splitting: 'newlines',
       lang: {
-        source_lang_user_selected: sourceLang,
-        target_lang: targetLang,
+        source_lang_user_selected: event.queryStringParameters.sourceLang,
+        target_lang: event.queryStringParameters.targetLang,
       },
       timestamp: getTimestamp(0),
     },
@@ -80,9 +74,6 @@ exports.handler = async function (
     }
 
     const result = response.data.result.texts[0]
-    if (printResult) {
-      console.log(result);
-    }
     return result;
   } catch (err) {
     console.error(err);
