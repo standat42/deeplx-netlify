@@ -77,8 +77,7 @@ exports.handler = async function (event, context) {
   return {
       statusCode: 200,
       headers: {
-          'cache-control': 'public, max-age=' + MAX_AGE,
-          'content-type': 'image/svg+xml'
+          'content-type': 'application/json'
       },
       body: result
   };
