@@ -57,25 +57,29 @@ exports.handler = async function (event, context) {
     postDataStr = postDataStr.replace('"method":"', '"method": "');
   }
 
-  try {
-    const response = await axios.post(DEEPL_BASE_URL, postDataStr, {
-      headers: headers,
-    });
+  const response = await axios.post(DEEPL_BASE_URL, postDataStr, {
+    headers: headers,
+  });
 
-    if (response.status === 429) {
-      throw new Error(
-        `Too many requests, your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time.`
-      );
-    }
-
-    if (response.status !== 200) {
-      console.error('Error', response.status);
-      return;
-    }
-
-    const result = response.data.result.texts[0]
-    return result;
-  } catch (err) {
-    console.error(err);
+  if (response.status === 429) {
+    throw new Error(
+      `Too many requests, your IP has been blocked by DeepL temporarily, please don't request it frequently in a short time.`
+    );
   }
+
+  if (response.status !== 200) {
+    console.error('Error', response.status);
+    return;
+  }
+
+  const result = response.data.result.texts[0]
+
+  return {
+      statusCode: 200,
+      headers: {
+          'cache-control': 'public, max-age=' + MAX_AGE,
+          'content-type': 'image/svg+xml'
+      },
+      body: result
+  };
 };
